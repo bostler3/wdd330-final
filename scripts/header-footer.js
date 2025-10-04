@@ -1,3 +1,3 @@
-import { loadHeaderFooter } from "/wdd330-final/scripts/utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
 loadHeaderFooter();
