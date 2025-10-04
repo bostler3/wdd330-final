@@ -1,0 +1,184 @@
+@media screen and (min-width: 480px) {
+    .navigation {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-header-text {
+        padding-left: 0.5rem;
+    }
+
+    .nav-options,
+    .footer-nav-options {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+    }
+
+    .footer-nav-options li {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .nav-options a,
+    .footer-nav-options a {
+        display: block;
+        text-decoration: none;
+    }
+
+    .nav-options a:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 5px;
+		background-color: var(--byzantium);
+		border: none;
+    }
+	
+	.nav-options a.active {
+        background-color: var(--mindaro);
+		border: none;
+    }
+
+    .active::before {
+        content: none;
+    }
+
+    .filter-options {
+        flex-direction: row;
+        align-items: center;
+        list-style: none;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        margin-left: 4rem;
+        margin-right: 4rem;
+    }
+
+    .filter-options a {
+        display: block;
+        text-decoration: none;
+    }
+
+    .filter-options a:hover {
+        color: black;
+        background-color: var(--main-background-color);
+        text-decoration: underline;
+        text-decoration-thickness: 5px;
+    }
+
+    #sub-nav {
+        grid-template-rows: 1fr;
+        transition: none;
+    }
+    
+    #menu,
+    #filter-menu {
+        display: none;
+    }
+
+    .hero-callouts {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-column-gap: 0;
+        grid-row-gap: 0;
+    }
+
+    .hero {
+        grid-area: 1 / 1 / 2 / 2;
+    }
+
+    .hero img {
+        width: 100%;
+        height: auto;
+    }
+
+    .callouts {
+        grid-area: 1 / 1 / 2 / 2;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .callout-data {
+        padding-top: 2rem;
+        width: 600px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0);
+    }
+
+    .callout-data-header,
+    .callout-data-subheader {
+        font-size: 150%;
+        color: var(--theme-text-color);
+    }
+
+    .callout-data-header {
+        padding-bottom: 1rem;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+        grid-gap: 25px;
+        align-items: end;
+    }
+
+    hr {
+        width: 12.5%;
+    }
+
+    /* Favorites */
+	.favorites-line {
+		width: 33%;
+	}
+	/* Tickets */
+    #display-option-buttons {
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .display-option-button {
+        display: inline-block;
+        padding: 1rem;
+        font-weight: bold;
+        font-size: larger;
+        font-family: "Roboto", sans-serif;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    fieldset {
+        max-width: 900px;
+    }
+
+    .list {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .list section {
+        grid-template-columns: 2fr 1fr 1fr auto;
+        text-align: left;
+    }
+
+    .list section>* {
+        margin: 0 1.5rem;
+    }
+
+    .list .schedule-team {
+        font-weight: bold;
+    }
+
+    .list p {
+        font-weight: normal;
+        font-size: 18px;
+    }
+
+    .list button {
+        width: 150px;
+        height: 50px;
+    }
+
+    .form button {
+        max-width: 150px;
+    }
+}
