@@ -1,5 +1,3 @@
-
-
 const baseAnimeURL = "https://api.jikan.moe/v4/";
 
 function convertToJson(res) {
