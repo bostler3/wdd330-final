@@ -1,7 +1,6 @@
 <!-- TO DO
- -Create confirmation "note" (animated)
  -Drop-down menu from localstorage favorites to work
- -Form validation
+ -Any other formatting
  -->
 
 <!DOCTYPE html>
@@ -16,49 +15,59 @@
     <link rel="stylesheet" href="../styles/normalize.css">
     <link rel="stylesheet" href="../styles/small.css">
     <link rel="stylesheet" href="../styles/large.css">
-    <script src="../scripts/header-footer.js" type="module"></script>
-    <!--<script src="scripts/index.js" defer></script>-->
+	<script src="../scripts/fanmail.js" type="module"></script>
 </head>
 <body>
     <header id="header">
 	</header>
     <main>
-        <!--<div class="hero-callouts">
-            <div class="hero">
-                <picture>
-                    <source srcset="images/hero-large.webp" media="(min-width: 480px)">
-                    <img src="images/hero-small.webp" alt="Hero image" width="406" height="416">
-                </picture>
-            </div>
-        </div>-->
-        <div id="form-heading">
-            <h1>CONTACT YOUR FAVORITE CHARACTER!</h1>
-            <p>(* Required field)</p>
-        </div>
-        <form method="get" class="form" onsubmit="showAck(event)">
-            <label for="toCharacters" id="select-label">To:*</label> <!--Need to fix this to grab favorite characters from localstorage-->
-            <select name="toCharacters" id="toCharacters" onchange="updateSelectedCharacter()" required>
-                <option value="" id="toCharacters-list-placeholder" disabled selected hidden>Choose a character ...
-                </option>
-            </select>
-            <div class="name-field">
-                <label>From:*<input type="text" name="full-name" id="full-name" placeholder="Type your name"
-                        required></label>
-            </div>
-			<div class="country-field">
-                <label>Which country are you from?:*<input type="text" name="country" id="country" placeholder="Type your country"
-                        required></label>
-            </div>
-            <div class="label-header">Share one of your favorite <span id="selected-character"></span> moments!</div>
-            <div class="fav-moment">
-                <textarea name="fav-moment" id="fav-moment" class="textareaResponse" rows="8" placeholder="Type favorite moment here..."></textarea>
-            </div>
-            <div class="label-header">Letter <span id="selected-character2"></span>*</div>
-            <div class="letter">
-                <textarea name="letter" id="letter" class="textareaResponse" rows="8" placeholder="Type letter here..."></textarea>
-            </div>
-            <input type="submit" value="Send the message">
-        </form>
+		<div id="form-heading">
+			<h1>CONTACT YOUR FAVORITE CHARACTER!</h1>
+			<p>(* Required field)</p>
+		</div>
+		<div id="joint-content-container">
+			<div class="left-side">
+				<form method="get" name="fanmail-form" class="form" onsubmit="showAck(event)">
+					<label for="toCharacters" id="select-label">To:*</label> <!--Need to fix this to grab favorite characters from localstorage-->
+					<select name="toCharacters" id="toCharacters" onchange="updateSelectedCharacter()" required>
+						<option value="" id="toCharacters-list-placeholder" disabled selected hidden>Choose a character ...
+						</option>
+					</select>
+					<div class="name-field">
+						<label>From:*<input type="text" name="full-name" id="full-name" placeholder="Type your name"
+								required></label>
+					</div>
+					<div class="country-field">
+						<label>Which country are you from?:*<input type="text" name="country" id="country" placeholder="Type your country"
+								required></label>
+					</div>
+					<div class="label-header">Share one of your favorite <span id="selected-character"></span> moments!</div>
+					<div class="fav-moment">
+						<textarea name="fav-moment" id="fav-moment" class="textareaResponse" rows="8" placeholder="Type favorite moment here..."></textarea>
+					</div>
+					<div class="label-header">Letter*</div>
+					<div class="letter">
+						<textarea name="letter" id="letter" class="textareaResponse" rows="8" placeholder="Type letter here..." required></textarea>
+					</div>
+					<button type="submit" id="submit-button">Send the message</button>
+				</form>
+			</div>
+			<div class="right-side">
+				<span id="target-scroll"></span>
+				<section class="response-form">
+					<div class="form-header-text">
+						<h2>Thank You!</h2><br>
+						<p id="response-area">Hi <span id="from-name"></span>,<br><br>
+						Thanks for your awesome letter!  I am so glad to hear from spectacular fans like you!  Keep being a super fan of Anime!<br><br>
+						Please write again soon!<br><br>
+						Sincerely,<br><br>
+						<span id="selected-character2"></span>
+						</p>
+					</div>
+					<button type="submit" id="another-letter-button" onclick="location.reload()">Send another letter</button> <!-- Got help from Bing search for how to refresh the current page -->
+				</section>
+			</div>
+		</div>
     </main>
     <footer id="footer">
 	</footer>

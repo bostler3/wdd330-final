@@ -32,25 +32,27 @@
         text-decoration-thickness: 5px;
 		background-color: var(--byzantium);
 		border: none;
+		color: white;
+		font-weight: normal;
     }
 	
 	.nav-options a.active {
         background-color: var(--mindaro);
+		color: black;
 		border: none;
     }
 
-    .active::before {
-        content: none;
-    }
-
     .filter-options {
-        flex-direction: row;
+        display: flex;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		flex-direction: row;
         align-items: center;
         list-style: none;
         padding-top: 1rem;
         padding-bottom: 1rem;
-        margin-left: 4rem;
-        margin-right: 4rem;
+        margin-left: 3rem;
+        margin-right: 3rem;
     }
 
     .filter-options a {
@@ -58,12 +60,6 @@
         text-decoration: none;
     }
 
-    .filter-options a:hover {
-        color: black;
-        background-color: var(--main-background-color);
-        text-decoration: underline;
-        text-decoration-thickness: 5px;
-    }
 
     #sub-nav {
         grid-template-rows: 1fr;
@@ -91,6 +87,11 @@
         height: auto;
     }
 
+    .show-detail-hero img {
+        width: auto;
+        height: auto;
+    }
+
     .callouts {
         grid-area: 1 / 1 / 2 / 2;
         display: flex;
@@ -115,37 +116,26 @@
         padding-bottom: 1rem;
     }
 
-    .container {
+    .container, .favorites-list {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
         grid-gap: 25px;
         align-items: end;
     }
+	
+	.favorites-list img {
+		width: 150px;
+	}
 
     hr {
         width: 12.5%;
     }
 
     /* Favorites */
-	.favorites-line {
+	.favorites-line, .show-detail-lines {
 		width: 33%;
 	}
 	/* Tickets */
-    #display-option-buttons {
-        text-align: center;
-        padding: 1rem;
-    }
-
-    .display-option-button {
-        display: inline-block;
-        padding: 1rem;
-        font-weight: bold;
-        font-size: larger;
-        font-family: "Roboto", sans-serif;
-        text-align: center;
-        cursor: pointer;
-    }
-
     fieldset {
         max-width: 900px;
     }
@@ -153,16 +143,18 @@
     .list {
         padding-left: 1rem;
         padding-right: 1rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
     }
 
     .list section {
-        grid-template-columns: 2fr 1fr 1fr auto;
-        text-align: left;
+        grid-template-columns: 1fr;
     }
 
-    .list section>* {
+    /*.list section>* {
         margin: 0 1.5rem;
-    }
+    }*/
 
     .list .schedule-team {
         font-weight: bold;
@@ -181,4 +173,18 @@
     .form button {
         max-width: 150px;
     }
+	.error-alert {
+		width: 400px;
+	}
+	/* Got help from here: https://css-tricks.com/left-and-right/ */
+	#joint-content-container {
+		display: grid;
+	}
+	.left-side {
+		grid-column: 1;
+	}
+	.right-side {
+		grid-column: 2;
+		align-self: center;
+	}
 }

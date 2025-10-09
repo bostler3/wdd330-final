@@ -2,6 +2,9 @@ import ExternalServices from "./ExternalServices.mjs";
 import ShowDetail from "./ShowDetail.mjs";
 import ShowCharacters from "./ShowCharacters.mjs";
 import { getParam } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
+
+loadHeaderFooter();
 
 const show = getParam("show");
 const dataSource = new ExternalServices();

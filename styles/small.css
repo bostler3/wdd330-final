@@ -17,7 +17,7 @@
     box-sizing: border-box;
 }
 
-#japan-font {
+#japan-font, .name-kanji {
 	font-family: var(--japanese-font), sans-serif;
 	font-size: smaller;
 }
@@ -72,7 +72,7 @@ nav {
     display: none;
     text-decoration: none;
     text-align: center;
-    color: black;
+    color: white;
     font-size: larger;
     padding: 0.5rem;
 }
@@ -103,23 +103,40 @@ nav {
 }
 
 .filter-options {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(4, 50px);
+    justify-content: center;
+	align-items: center;
+	text-align: center;
     list-style: none;
 }
 
 .filter-options a {
-    display: none;
-    text-decoration: none;
+    display: inline-block;
+	width: 150px;
+	text-decoration: none;
     text-align: center;
     color: black;
-    padding: 0.5rem;
+    margin: 1rem 0.5rem;
+	padding: 0.5rem;
+	font-family: "Roboto", sans-serif;
+	font-weight: bold;
+    background: linear-gradient(45deg, var(--metallic-silver), var(--byzantium));
+    border: none;
+    border-radius: 25px;
+    transition: 0.3s ease;
 }
 
 .filter-options a:hover {
-    font-weight: bold;
-    background-color: lightgray;
+    background: linear-gradient(45deg, var(--byzantium), var(--metallic-silver));
+    transform: scale(1.1);
+}
+
+.filter-options a.active {
+	background: var(--main-red);
+	color: black;
+	border: none;
 }
 
 #menu,
@@ -159,6 +176,16 @@ nav {
     height: auto;
 }
 
+.show-detail-hero {
+    text-align: center;
+    padding: 1rem;
+}
+
+.show-detail-hero img {
+    width: 100%;
+    height: auto;
+}
+
 .top-shows-container {
     display: flex;
     flex-direction: row;
@@ -168,10 +195,10 @@ nav {
 
 h1 {
     text-align: center;
-    color: var(--epl-purple);
+    margin: 0.5rem;
 }
 
-.container {
+.container, .pokemon {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     grid-gap: 5px;
@@ -181,7 +208,7 @@ h1 {
     padding: 1rem 0;
 }
 
-.container a {
+.container a, .pokemon a {
     text-decoration: none;
     text-align: center;
     color: black;
@@ -192,16 +219,16 @@ h1 {
     transform: scale(1.10);
 }
 
-.container section {
+.container section, .pokemon section {
     border: 0.5px solid black;
     border-radius: 25px;
     margin: 0.25rem 2.25rem;
     padding: 1rem;
-    background-color: rgba(96, 165, 250, 0.2);
+    background-color: rgba(219, 254, 135, 0.5);
     text-align: center;
 }
 
-.container img {
+.container img, .pokemon section {
     width: 125px;
     height: auto;
     padding: 0.5rem;
@@ -213,6 +240,32 @@ h1 {
 
 .container p {
     padding-bottom: 0.5rem;
+}
+
+.favorites-list {
+	text-align: center;
+	margin: 1rem 0;
+	padding: 0.5rem 0;
+	list-style: none;
+}
+
+.favorites-list li {
+	margin-bottom: 1rem;
+}
+
+.favorites-list a {
+	text-decoration: none;
+	color: black;
+}
+
+.favorites-list li:hover {
+    transform: scale(1.05);
+}
+
+.favorites-list img  {
+	width: 200px;
+    height: auto;
+	padding: 0.5rem;
 }
 
 .showCard:hover {
@@ -306,7 +359,7 @@ footer p {
 .footer-nav-options a {
     text-decoration: none;
     text-align: center;
-    color: black;
+    color: white;
     padding: 0.5rem;
 }
 
@@ -324,6 +377,42 @@ hr {
     border-top: 1px solid var(--main-background-color);
 }
 
+.show-detail-container, .characters-container, #favorite-shows, #favorite-characters {
+    margin: 0.75rem auto;
+    padding: 0 1rem;
+}
+
+.favorite-star {
+    color: gray;
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.favorite-star.currentFavorite {
+    color: gold;
+}
+
+.show-detail-lines {
+    height: 0.5px;
+    width: 66%;
+    margin: 0.25rem 0;
+    border: none;
+    border-top: 3px solid var(--dark-gray);
+}
+
+.synopsis-container {
+	padding: 0.5rem 0;
+}
+
+#synopsis {
+    font-style: italic;
+    padding: 0.5rem;
+}
+
+/* .characters-container {
+    display: block;
+} */
+
 /* Players page */
 /* Got help from a Bing search for "css and javascript show some information on one side of a card and the rest on the other side of the card like a baseball trading card" */
 #player-tip-text {
@@ -331,7 +420,7 @@ hr {
     font-size: 22px;
     padding-bottom: 1rem;
 }
-.card-container {
+.show-characters-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     grid-gap: 50px;
@@ -343,7 +432,7 @@ hr {
 
 .card {
     width: 300px;
-    height: 400px;
+    height: 500px;
     position: relative;
     margin-left: auto;
     margin-right: auto;
@@ -360,23 +449,24 @@ hr {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card-front {
-    background-color: #ffffff;
+    background-color: rgba(219, 254, 135, 0.5);
+	align-items: center;
 }
 
 .card-front img {
-    width: 100%;
+    width: 200px;
     height: auto;
 }
 
-.card-front h2 {
+.card-front h3 {
     padding-top: 0.75rem;
+	font-size: 25px;
 }
 
 .card-front p {
@@ -384,9 +474,15 @@ hr {
     font-style: italic;
 }
 
+.card-front > .name-kanji {
+    font-size: smaller;
+}
+
 .card-back {
-    background-color: #f8f8f8;
+    background-color: rgba(122, 48, 108, 0.25);
     transform: rotateY(180deg);
+	align-items: left;
+	padding-left: 1rem;
 }
 
 .card-back h2 {
@@ -399,6 +495,14 @@ hr {
 .card-back p {
     font-size: 20px;
     line-height: 2;
+}
+
+.card-back ul {
+    padding-left: 1.25rem;
+}
+
+.card-back li {
+    line-height: 1.5;
 }
 
 .card.flipped {
@@ -415,8 +519,28 @@ hr {
 }
 
 /* Fan Mail */
+#display-option-buttons {
+	text-align: center;
+	margin-top: 1rem;
+	padding: 0.5rem;
+}
+
 .display-option-button {
-    display: none;
+	display: inline-block;
+	margin: 0 1rem;
+	padding: 0.75rem;
+	font-weight: bold;
+	font-family: "Roboto", sans-serif;
+	text-align: center;
+	cursor: pointer;
+	background: linear-gradient(45deg, var(--theme-text-color), var(--mindaro));
+	border: none;
+	transition: 0.3s ease;
+}
+
+.display-option-button:hover {
+	background: linear-gradient(45deg, var(--mindaro), var(--theme-text-color));
+	transform: scale(1.05);
 }
 
 .schedule-container {
@@ -476,24 +600,33 @@ hr {
     padding-bottom: 1rem;
 }
 
-.list section {
+.list li {
     display: grid;
     grid-template-columns: 1fr;
     min-width: 320px;
     margin: 0;
     padding: 0.25rem;
+	background-color: var(--mindaro);
 }
 
-.list section:nth-child(even) {
-    background-color: rgba(255, 75, 68, 0.2);
+.list figure {
+	display: none;
 }
 
-.application-form {
+.list li:nth-child(even) {
+    background-color: rgba(122, 48, 108, 0.55);
+}
+
+.response-form {
     display: none;
 }
 
 .show {
     display: block;
+	margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+	padding-left: 1rem;
+    padding-right: 1rem;
     transform: translateX(-100%);
     opacity: 0;
     animation: smooth-appear 1s ease-out forwards;
@@ -572,7 +705,7 @@ input[type="radio"] {
     height: 19px;
 }
 
-input[type="submit"] {
+#submit-button {
     font-family: "Roboto", sans-serif;
     display: inline-block;
     cursor: pointer;
@@ -590,7 +723,7 @@ input[type="submit"] {
     height: 45px;
 }
 
-input[type="submit"]:hover {
+#submit-button:hover {
     background: linear-gradient(45deg, var(--mindaro), var(--main-red));
     transform: scale(1.02);
 }
@@ -642,3 +775,55 @@ ol li:not(:first-of-type) {
 ol li:not(:last-of-type) {
     padding-bottom: 0.75rem;
 }
+
+
+
+.error-alert {
+	display: none;
+	padding: 0.5rem;
+	width: 100%;
+	background-color: rgba(255, 165, 0, 0.75);
+	border: 1px solid darkorange;
+}
+
+.closeSymbol {
+	float: right;
+}
+
+.closeSymbol {
+	cursor: pointer;
+}
+
+#another-letter-button {
+    font-family: "Roboto", sans-serif;
+    display: inline-block;
+    cursor: pointer;
+    background: linear-gradient(45deg, var(--metallic-silver), var(--byzantium));
+    color: black;
+    border: none;
+    margin-top: 0.5rem;
+	padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 25px;
+    transition: 0.3s ease;
+    text-decoration: none;
+    width: 100%;
+    max-width: 400px;
+    height: 45px;
+}
+
+#another-letter-button:hover {
+    background: linear-gradient(45deg, var(--byzantium), var(--metallic-silver));
+    transform: scale(1.02);
+}
+
+.favorite-star {
+	color: gray;
+	font-size: 3rem;
+	cursor: pointer;
+}
+
+.favorite-star.currentFavorite {
+	color: gold;
+}
+

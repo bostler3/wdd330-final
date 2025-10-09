@@ -1,4 +1,5 @@
 const baseAnimeURL = "https://api.jikan.moe/v4/";
+const basePokeURL = "https://pokeapi.co/api/v2/pokemon/";
 
 function convertToJson(res) {
     const jsonResponse = res.json();
@@ -46,6 +47,13 @@ export default class ExternalServices {
         //console.log('Selected character IDs:', selectedCharactersIDs);
         return selectedCharactersIDs;
     }
+    getPokemonCharacters() {
+        // Top characters source: https://fictionhorizon.com/the-most-popular-pokemon-ranked/
+        let selectedCharactersNames = ["charizard", "pikachu", "bulbasaur", "eevee", "dragapult", "gengar", "lucario", "greninja", "gardevoir", "rayquaza", "gyarados", "togekiss", "arcanine", "sylveon", "tyranitar", "vaporeon", "snorlax", "blastoise", "flygon"];
+        // console.log('Selected character names:', selectedCharactersNames);
+        return selectedCharactersNames;
+    }
+
     async getCharacterDetail(show) {
         const responses = [];
         const characters = await this.getCharactersByShow(show);
@@ -61,6 +69,23 @@ export default class ExternalServices {
             }
         }
         //console.log('Characters', responses);
+        return responses;
+    }
+    async getPokemonCharacterDetail() {
+        const responses = [];
+        const characters = this.getPokemonCharacters();
+        // Got help from a Bing search for how to put objects into an array (responses) based on interating through an array (characters).
+        // I tried forEach, but it didn't work. Bing helped me find 'for...of'.
+        for (const character of characters) {
+            try {
+                const response = await fetch(`${basePokeURL}${character}`);
+                const data = await response.json();
+                responses.push({ character, data });
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+        // console.log('Poke Characters', responses);
         return responses;
     }
 }

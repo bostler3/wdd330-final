@@ -1,5 +1,10 @@
-// TODO:  Incorporate favorites functionality
-import { renderListWithTemplate } from "./utils.mjs";
+/* TODO:
+-Incorporate favorites functionality
+-Trading card functionality
+*/
+import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
+
+const charactersElement = document.querySelector(".characters-container");
 
 export default class ShowCharacters {
     constructor(showID, dataSource, displayElement) {
@@ -12,6 +17,12 @@ export default class ShowCharacters {
         this.character = await this.dataSource.getCharacterDetail(this.showID);
         this.renderDisplay();
     }
+    addCharacterToFavorites() {
+        const characters = getLocalStorage("ls-characters") || [];
+        characters.push(this.character);
+        setLocalStorage("ls-characters", characters);
+        alertMessage("Character added to favorites!");
+    }
     renderDisplay() {
         showDetailTemplate(this.character, this.displayElement);
     }
@@ -19,7 +30,6 @@ export default class ShowCharacters {
 
 function showDetailTemplate(character, displayElement) {
     character.forEach((element) => {
-        //console.log("testing");
         let card = document.createElement("div");
         let cardFront = document.createElement("section");
         let cardBack = document.createElement("section");
@@ -30,9 +40,14 @@ function showDetailTemplate(character, displayElement) {
         let nameKanji = document.createElement("p");
         nameKanji.setAttribute("class", "name-kanji");
         let photo = document.createElement("img");
-        //let favoriteCharacterIcon = document.createElement("div");
-        //favoriteCharacterIcon.setAttribute("class", "favorite-star");
-        //favoriteCharacterIcon.innerHTML = "&#9733";
+        let birthplace = document.createElement("p");
+        let nicknames = document.createElement("p");
+        let favorites = document.createElement("p");
+        let favoriteCharacterIcon = document.createElement("div");
+        favoriteCharacterIcon.setAttribute("class", "favorite-star");
+        favoriteCharacterIcon.setAttribute("id", "favorite-star2");
+        favoriteCharacterIcon.innerHTML = "&#9733";
+        favoriteCharacterIcon.setAttribute("data-id", element.data.data.mal_id);
         photo.setAttribute("src", element.data.data.images.webp.image_url);
         photo.setAttribute("alt", `Image of ${element.data.data.name} anime character`);
         photo.setAttribute("loading", "lazy");
@@ -40,31 +55,38 @@ function showDetailTemplate(character, displayElement) {
         photo.setAttribute("height", "75");
         name.textContent = element.data.data.name;
         nameKanji.innerHTML = element.data.data.name_kanji;
+        const nicknamesArray = element.data.data.nicknames;
+        const result = nicknamesArray.map(obj => obj).join(", ");
+        if (result == "") {
+            nicknames.textContent = "Nicknames: None";
+        } else {
+            nicknames.textContent = `Nicknames: ${result}`;
+        }
+
+        const returnedFavorites = element.data.data.favorites;
+        const properFavorites = returnedFavorites.toLocaleString("en-us");
+        favorites.textContent = `# of fan favorites: ${properFavorites}`;
         cardFront.appendChild(name);
         cardFront.appendChild(nameKanji);
-        //cardFront.appendChild(favoriteCharacterIcon);
+        cardFront.appendChild(favoriteCharacterIcon);
         cardFront.appendChild(photo);
         card.appendChild(cardFront);
+        cardBack.appendChild(birthplace);
+        cardBack.appendChild(nicknames);
+        cardBack.appendChild(favorites);
         card.appendChild(cardBack);
-        displayElement.appendChild(card);
+        charactersElement.appendChild(card);
+        card.addEventListener("click", () => {
+            card.classList.toggle("flipped");
+        });
+
+        /*favoriteCharacterIcon.addEventListener("click", () => {
+            card.classList.toggle("flipped");
+            const cartItems = getLocalStorage("ls-char") || [];
+            cartItems.push(character.data);
+            setLocalStorage("ls-char", cartItems);
+            favoriteCharacterIcon.classList.toggle("currentFavorite");
+            console.log("Item added to local storage added!");                     
+        });*/
     });
 }
-
-/*function characterCardTemplate(character) {
-    return `<li class="container">${character.data.data.name}</li>`
-}
-
-export default class CharacterList {
-    constructor(showID, dataSource, listElement) {
-        this.showID = showID;
-        this.dataSource = dataSource;
-        this.listElement = listElement;
-    }
-    async init() {
-        const list = await this.dataSource.getCharacterDetail(this.showID);
-        this.renderList(list);
-    }
-    renderList(list) {
-        renderListWithTemplate(characterCardTemplate, this.listElement, list);
-    }
-}*/

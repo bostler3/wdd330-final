@@ -7,11 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Serif+JP&family=Patua+One&family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/normalize.css">
-    <link rel="stylesheet" href="./styles/small.css">
-    <link rel="stylesheet" href="./styles/large.css">
-    <script src="./scripts/header-footer.js" type="module"></script>
-    <script src="./scripts/show-listing.js" type="module"></script>
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/small.css">
+    <link rel="stylesheet" href="styles/large.css">
+    <script src="scripts/show-listing.js" type="module"></script>
 </head>
 <body>
     <header id="header">
@@ -20,8 +19,8 @@
         <div class="hero-callouts">
             <div class="hero">
                 <picture>
-                    <source srcset="./images/hero-large.webp" media="(min-width: 480px)">
-                    <img src="./images/hero-small.webp" alt="Hero image" width="406" height="416">
+                    <source srcset="images/hero-large.webp" media="(min-width: 480px)">
+                    <img src="images/hero-small.webp" alt="Hero image" width="406" height="416">
                 </picture>
             </div>
         </div>
@@ -35,6 +34,11 @@
             <li><a href="#" id="romance">Romance</a></li>
             <li><a href="#" id="supernatural">Supernatural</a></li>
         </ul>
+        <div id="display-option-buttons">
+            <!--Source for grid button symbol: https://stackoverflow.com/questions/22289123/is-there-any-unicode-equivalent-for-a-grid-of-icons-symbol-->
+            <button id="grid" class="display-option-button" title="Grid menu button">&#5010&#5010&#5010 Grid</button>
+            <button id="list" class="display-option-button" title="List menu button">&#9776 List</button>
+        </div>
         <ul class="container">
         </ul>
     </main>
