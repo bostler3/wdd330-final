@@ -14,7 +14,7 @@ function createPokeCard() {
     const pokeCard = document.createElement("li");
     pokeCard.setAttribute("class", "container");
     pokeCard.innerHTML = `<a href="./show_detail/pokemon.html">
-            <figure><img src="./images/pokemon.webp" alt="Pokemon image"></figure>
+            <figure><img src="images/pokemon.webp" alt="Pokemon image"></figure>
             <figcaption>Pokémon</figcaption>
         </a>`
     element.appendChild(pokeCard);
