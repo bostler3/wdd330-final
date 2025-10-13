@@ -4,7 +4,7 @@
 */
 import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
 
-const charactersElement = document.querySelector(".characters-container");
+const charactersElement = document.querySelector(".show-characters-container");
 
 export default class ShowCharacters {
     constructor(showID, dataSource, displayElement) {
@@ -16,19 +16,31 @@ export default class ShowCharacters {
     async init() {
         this.character = await this.dataSource.getCharacterDetail(this.showID);
         this.renderDisplay();
+        //document.querySelector("#favorite-star2").addEventListener("click", this.addCharacterToFavorites.bind(this));
     }
-    addCharacterToFavorites() {
-        const characters = getLocalStorage("ls-characters") || [];
-        characters.push(this.character);
-        setLocalStorage("ls-characters", characters);
-        alertMessage("Character added to favorites!");
-    }
+    /*addCharacterToFavorites() {
+        const favoriteCharacterIcon = document.querySelector("#favorite-star2");
+        const card = document.querySelector(".card");
+        let favCharacters = getLocalStorage("ls-characters") || [];
+        card.classList.toggle("flipped");
+        if (favoriteCharacterIcon.classList.contains("favorite-star-currentFavorite")) {
+            favCharacters = favCharacters.filter(item => item.mal_id !== element.data.data.mal_id);
+            setLocalStorage("ls-characters", favCharacters);
+            favoriteCharacterIcon.classList.remove("favorite-star-currentFavorite");
+            alertMessage("Character removed from favorites!");
+        } else {
+            favCharacters.push(element);
+            setLocalStorage("ls-characters", favCharacters);
+            favoriteCharacterIcon.classList.add("favorite-star-currentFavorite");
+            alertMessage("Character added to favorites!");
+        }
+    }*/
     renderDisplay() {
         showDetailTemplate(this.character, this.displayElement);
     }
 }
 
-function showDetailTemplate(character, displayElement) {
+function showDetailTemplate(character) {
     character.forEach((element) => {
         let card = document.createElement("div");
         let cardFront = document.createElement("section");
@@ -43,11 +55,11 @@ function showDetailTemplate(character, displayElement) {
         let birthplace = document.createElement("p");
         let nicknames = document.createElement("p");
         let favorites = document.createElement("p");
-        let favoriteCharacterIcon = document.createElement("div");
+        /*let favoriteCharacterIcon = document.createElement("div");
         favoriteCharacterIcon.setAttribute("class", "favorite-star");
         favoriteCharacterIcon.setAttribute("id", "favorite-star2");
         favoriteCharacterIcon.innerHTML = "&#9733";
-        favoriteCharacterIcon.setAttribute("data-id", element.data.data.mal_id);
+        favoriteCharacterIcon.setAttribute("data-id", element.data.data.mal_id);*/
         photo.setAttribute("src", element.data.data.images.webp.image_url);
         photo.setAttribute("alt", `Image of ${element.data.data.name} anime character`);
         photo.setAttribute("loading", "lazy");
@@ -68,7 +80,7 @@ function showDetailTemplate(character, displayElement) {
         favorites.textContent = `# of fan favorites: ${properFavorites}`;
         cardFront.appendChild(name);
         cardFront.appendChild(nameKanji);
-        cardFront.appendChild(favoriteCharacterIcon);
+        //cardFront.appendChild(favoriteCharacterIcon);
         cardFront.appendChild(photo);
         card.appendChild(cardFront);
         cardBack.appendChild(birthplace);
@@ -80,13 +92,9 @@ function showDetailTemplate(character, displayElement) {
             card.classList.toggle("flipped");
         });
 
-        /*favoriteCharacterIcon.addEventListener("click", () => {
-            card.classList.toggle("flipped");
-            const cartItems = getLocalStorage("ls-char") || [];
-            cartItems.push(character.data);
-            setLocalStorage("ls-char", cartItems);
-            favoriteCharacterIcon.classList.toggle("currentFavorite");
-            console.log("Item added to local storage added!");                     
-        });*/
+        /*const favCharacters = getLocalStorage("ls-characters") || [];
+        if (favCharacters.some(item => item.mal_id === element.data.data.name)) {
+            favoriteCharacterIcon.classList.add("favorite-star-currentFavorite");
+        }*/
     });
 }

@@ -1,7 +1,3 @@
-/* TODO:
--Incorporate remove from favorites functionality
--Style favorites and check if already a favorite
-*/
 import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
 
 export default class ShowDetail {
@@ -16,10 +12,22 @@ export default class ShowDetail {
         document.querySelector("#favoriteStar").addEventListener("click", this.addShowToFavorites.bind(this));
     }
     addShowToFavorites() {
-        const shows = getLocalStorage("ls-shows") || [];
-        shows.push(this.show);
-        setLocalStorage("ls-shows", shows);
-        alertMessage("Show added to favorites!");
+        const favoriteStar = document.querySelector("#favoriteStar");
+        let shows = getLocalStorage("ls-shows") || [];
+        // If the click is to "unfavorite", then remove from localStorage and remove style
+        if (favoriteStar.classList.contains("favorite-star-currentFavorite")) {
+            // Got help from a Bing search for: "delete item from local storage that is an array of objects javascript"
+            shows = shows.filter(item => item.mal_id !== Number(this.showID));
+            setLocalStorage("ls-shows", shows);
+            favoriteStar.classList.remove("favorite-star-currentFavorite");
+            alertMessage("Show removed from favorites!");
+        } else {
+            // If the click is to make a favorite, then add to localStorage and style
+            shows.push(this.show);
+            setLocalStorage("ls-shows", shows);
+            favoriteStar.classList.add("favorite-star-currentFavorite");
+            alertMessage("Show added to favorites!");
+        }
     }
     renderDisplay() {
         showDetailTemplate(this.show);
@@ -42,4 +50,10 @@ function showDetailTemplate(show) {
     document.querySelector("#aired").textContent = `Aired: ${formattedFromDate} - ${formattedToDate}`;
     document.querySelector("#numOfEpisodes").textContent = `Number of episodes: ${show.episodes}`;
     document.querySelector("#synopsis").textContent = show.synopsis;
+    // If show already in localStorage, then add styling class to star
+    const favShows = getLocalStorage("ls-shows") || [];
+    // Got help on this from a Bing search for: "determine if item is in a localStorage key if the localStorage value is an array of objects"
+    if (favShows.some(item => item.mal_id === show.mal_id)) {
+        document.querySelector("#favoriteStar").classList.add("favorite-star-currentFavorite");
+    }
 }

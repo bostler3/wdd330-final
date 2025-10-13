@@ -28,7 +28,11 @@
 		<div id="joint-content-container">
 			<div class="left-side">
 				<form method="get" name="fanmail-form" class="form" onsubmit="showAck(event)">
-					<label for="toCharacters" id="select-label">To:*</label> <!--Need to fix this to grab favorite characters from localstorage-->
+					<!-- <label for="shows" id="shows-select-label">Show:*</label>
+					<select name="shows" id="shows" required>
+						<option value="" id="shows-list-placeholder" disabled selected hidden>Choose a show ...
+						</option> -->
+					</select><label for="toCharacters" id="select-label">To:*</label> <!--Need to fix this to grab favorite characters from localstorage-->
 					<select name="toCharacters" id="toCharacters" onchange="updateSelectedCharacter()" required>
 						<option value="" id="toCharacters-list-placeholder" disabled selected hidden>Choose a character ...
 						</option>

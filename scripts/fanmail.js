@@ -1,7 +1,24 @@
 import { alertMessage } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
+import FanMailShowList from "./MailShowList.mjs";
 
 loadHeaderFooter();
+
+/*const dataSource = new ExternalServices();
+const element = document.querySelector("#shows");
+const showList = new FanMailShowList(dataSource, element);
+
+showList.init();
+
+function createPokeOption() {
+  const pokeOption = document.createElement("option");
+  pokeOption.textContent = "Pokémon";
+  pokeOption.value = "Pokémon";
+  element.add(pokeOption);
+}
+
+createPokeOption();*/
 
 // For testing...delete once localstorage favorites is available
 const characters = [
@@ -12,6 +29,9 @@ const characters = [
     characterName: "Test2"
   }
 ]
+
+
+
 
 // This will help populate the "To" field drop-down once localstorage is populated with favorite characters
 const selectElement = document.querySelector("#toCharacters");
@@ -24,7 +44,6 @@ characters.forEach (character => {
 });
 
 function updateSelectedCharacter () {
-  const root = document.documentElement;
   const selectedCharacterValue = selectElement.options[selectElement.selectedIndex].value;
   document.querySelector("#selected-character").textContent = selectedCharacterValue;
 }

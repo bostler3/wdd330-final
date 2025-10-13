@@ -35,8 +35,8 @@ export async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-    const headerTemplate = await loadTemplate("/partials/header.html");
-    const footerTemplate = await loadTemplate("/partials/footer.html");
+    const headerTemplate = await loadTemplate("../partials/header.html");
+    const footerTemplate = await loadTemplate("../partials/footer.html");
 
     const headerElement = document.querySelector("#header");
     const footerElement = document.querySelector("#footer");
@@ -50,8 +50,16 @@ export async function loadHeaderFooter() {
     // Adds "active" class to nav links; got some help from Bing searches (adding a class to an element and parsing a string)
     const currentPageOrig = window.location.pathname;
     const currentPage = currentPageOrig.substring(currentPageOrig.lastIndexOf("/") + 1);
-    const menuItems = document.querySelectorAll("nav ul li a");
-    menuItems.forEach(item => {
+    const navMenuItems = document.querySelectorAll("nav ul li a");
+    const footerMenuItems = document.querySelectorAll("footer ul li a");
+    navMenuItems.forEach(item => {
+        const href = item.getAttribute("href");
+        const fileName = href.substring(href.lastIndexOf("/") + 1);
+        if (fileName === currentPage) {
+            item.classList.add("active");
+        }
+    })
+    footerMenuItems.forEach(item => {
         const href = item.getAttribute("href");
         const fileName = href.substring(href.lastIndexOf("/") + 1);
         if (fileName === currentPage) {

@@ -20,6 +20,7 @@
 #japan-font, .name-kanji {
 	font-family: var(--japanese-font), sans-serif;
 	font-size: smaller;
+    padding-bottom: 1rem;
 }
 
 main {
@@ -388,7 +389,7 @@ hr {
     cursor: pointer;
 }
 
-.favorite-star.currentFavorite {
+.favorite-star-currentFavorite {
     color: gold;
 }
 
@@ -816,14 +817,3 @@ ol li:not(:last-of-type) {
     background: linear-gradient(45deg, var(--byzantium), var(--metallic-silver));
     transform: scale(1.02);
 }
-
-.favorite-star {
-	color: gray;
-	font-size: 3rem;
-	cursor: pointer;
-}
-
-.favorite-star.currentFavorite {
-	color: gold;
-}
-
