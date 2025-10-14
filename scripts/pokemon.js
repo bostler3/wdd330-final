@@ -10,7 +10,7 @@ favoriteStar.innerHTML = "&#9733";
 
 document.querySelector("#show-detail-title").textContent = "Pokémon";
 const image = document.querySelector("#hero-image");
-image.src = "../images/pokemon.webp";
+image.src = "images/pokemon.webp";
 image.alt = "Pokemon image";
 document.querySelector("#aired").textContent = "Aired: 1997 - Present";
 document.querySelector("#numOfEpisodes").textContent = "Number of episodes: 1,345";
@@ -28,7 +28,7 @@ favoriteStar.addEventListener("click", () => {
         // If the click is to make a favorite, then add to localStorage and style
         const pokeLocalStorageObject = {
             name: "Pokémon",
-            imageURL: "../images/pokemon.webp",
+            imageURL: "images/pokemon.webp",
             imageAlt: "Pokémon image",
             yearStarted: 1997
         };
