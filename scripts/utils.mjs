@@ -93,5 +93,5 @@ export function alertMessage(message, scroll = true) {
     // Got help from a Bing search for: "show a div on the page for five seconds javascript"
     setTimeout(() => {
         alertElement.style.display = "none";
-    }, 5000);
+    }, 3000);
 }
