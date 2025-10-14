@@ -2,9 +2,11 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 function showAnimeCardTemplate(favorite) {
     return `<li>
-        <a href="../show_detail/index.html?show=${favorite.mal_id}">
-            <figure><img src="${favorite.images.webp.large_image_url}" alt="Image of ${favorite.title_english}"></figure>
-            <figcaption>${favorite.title_english}</figcaption>
+        <a href="show-detail.html?show=${favorite.mal_id}">
+            <figure><img src="${favorite.images.webp.large_image_url}" alt="Image of ${favorite.title_english}">
+                <figcaption>${favorite.title_english}<br>
+                Started: ${favorite.year}</figcaption>
+            </figure>
         </a>
     </li>`
 }

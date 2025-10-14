@@ -29,7 +29,8 @@ favoriteStar.addEventListener("click", () => {
         const pokeLocalStorageObject = {
             name: "Pokémon",
             imageURL: "../images/pokemon.webp",
-            imageAlt: "Pokémon image"
+            imageAlt: "Pokémon image",
+            yearStarted: 1997
         };
         shows.push(pokeLocalStorageObject);
         setLocalStorage("ls-poke-show", shows);
