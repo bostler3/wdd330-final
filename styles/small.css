@@ -140,8 +140,7 @@ nav {
 	border: none;
 }
 
-#menu,
-#filter-menu {
+#menu {
     display: block;
     text-decoration: none;
     position: absolute;
@@ -185,13 +184,6 @@ nav {
 .show-detail-hero img {
     width: 100%;
     height: auto;
-}
-
-.top-shows-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding: 1rem;
 }
 
 h1 {
@@ -273,64 +265,6 @@ h1 {
 	transform: scale(1.05);
 }
 
-.modalOpenButton {
-    font-family: "Roboto", sans-serif;
-    display: inline-block;
-    cursor: pointer;
-    background: linear-gradient(45deg, var(--la-liga-red), var(--theme-text-color));
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    font-size: 18px;
-    border-radius: 25px;
-    transition: 0.3s ease;
-    text-decoration: none;
-}
-
-.modalOpenButton:hover {
-    background: linear-gradient(45deg, var(--theme-text-color), var(--la-liga-red));
-    transform: scale(1.1);
-}
-
-dialog {
-    border: 1px solid rgb(0 0 0 / 10%);
-    border-radius: 0.25rem;
-    padding: 1rem;
-    background-color: #fff;
-    box-shadow: 0 0 3rem #777;
-    width: 90%;
-    max-width: 600px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-dialog::backdrop {
-    background-color: rgb(0 0 0 / 50%);
-}
-
-.modalCloseButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-dialog h3 {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 8px;
-    padding-bottom: 1rem;
-    text-align: left;
-}
-
-dialog p {
-    text-align: left;
-}
-
 footer {
     text-align: center;
     font-size: 90%;
@@ -389,8 +323,12 @@ hr {
     cursor: pointer;
 }
 
+.favorite-star:hover {
+    transform: scale(1.25);
+}
+
 .favorite-star-currentFavorite {
-    color: gold;
+    color: var(--byzantium);
 }
 
 .show-detail-lines {
@@ -410,17 +348,6 @@ hr {
     padding: 0.5rem;
 }
 
-/* .characters-container {
-    display: block;
-} */
-
-/* Players page */
-/* Got help from a Bing search for "css and javascript show some information on one side of a card and the rest on the other side of the card like a baseball trading card" */
-#player-tip-text {
-    text-align: center;
-    font-size: 22px;
-    padding-bottom: 1rem;
-}
 .show-characters-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -480,9 +407,8 @@ hr {
 }
 
 .card-back {
-    background-color: rgba(122, 48, 108, 0.25);
+    background-color: var(--main-red);
     transform: rotateY(180deg);
-	align-items: left;
 	padding-left: 1rem;
 }
 
@@ -542,57 +468,6 @@ hr {
 .display-option-button:hover {
 	background: linear-gradient(45deg, var(--mindaro), var(--theme-text-color));
 	transform: scale(1.05);
-}
-
-.schedule-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-gap: 0.5rem;
-    align-items: center;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 1rem;
-}
-
-.schedule-container section {
-    border: 0.5px solid black;
-    border-radius: 5px;
-    margin: 0.25rem 1rem;
-    padding: 1rem;
-    background-color: rgba(96, 165, 250, 0.2);
-    text-align: center;
-}
-
-.schedule-team {
-    font-size: 22px;
-    font-weight: bold;
-    padding: 0.25rem;
-}
-
-.game-details {
-    line-height: 1.5;
-    font-size: 16px;
-    padding-bottom: 0.25rem;
-}
-
-.scheduleButton {
-    font-family: "Roboto", sans-serif;
-    display: inline-block;
-    cursor: pointer;
-    background: linear-gradient(45deg, var(--la-liga-red), var(--theme-text-color));
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    font-size: 18px;
-    border-radius: 25px;
-    transition: 0.3s ease;
-    text-decoration: none;
-}
-
-.scheduleButton:hover {
-    background: linear-gradient(45deg, var(--theme-text-color), var(--la-liga-red));
-    transform: scale(1.05);
 }
 
 .list {
@@ -656,11 +531,6 @@ fieldset {
     margin: 0.75rem 0;
 }
 
-legend {
-    color: var(--epl-purple);
-    font-weight: bold;
-}
-
 #form-heading {
     padding: 1rem 0.5rem 0.5rem 0.5rem;
 }
@@ -674,8 +544,6 @@ legend {
 }
 
 .form input[type="text"],
-.form input[type="email"],
-.form input[type="tel"],
 .form textarea,
 .form select {
     display: block;
@@ -689,21 +557,6 @@ legend {
     font-size: 0.9rem;
     padding-top: 1rem;
     padding-bottom: 0.25rem;
-}
-
-.level-radio label {
-    padding: 0.5rem;
-    font-size: 1rem;
-    font-weight: normal;
-}
-
-.radio-label-text {
-    padding-left: 0.5rem;
-}
-
-input[type="radio"] {
-    width: 19px;
-    height: 19px;
 }
 
 #submit-button {
@@ -728,56 +581,6 @@ input[type="radio"] {
     background: linear-gradient(45deg, var(--mindaro), var(--main-red));
     transform: scale(1.02);
 }
-
-.disclaimer-text {
-    padding: 0.75rem 1rem;
-    font-style: italic;
-    line-height: 1.5;
-}
-
-/* Confirmation Page */
-#results {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    padding: 1rem;
-}
-
-#results h2 {
-    padding: 1rem 0;
-    text-decoration: underline;
-    text-underline-offset: 8px;
-    color: var(--la-liga-red);
-}
-
-#results ul {
-    margin-left: 1.5rem;
-    line-height: 1.5;
-}
-
-#results li {
-    padding: 0.5em 0;
-}
-
-#results p {
-    line-height: 2;
-}
-
-/* References */
-ol {
-    list-style-type: decimal;
-    margin-left: 1em;
-    padding: 1rem 1rem 1rem 40px;
-}
-
-ol li:not(:first-of-type) {
-    padding-top: 0.75rem;
-}
-
-ol li:not(:last-of-type) {
-    padding-bottom: 0.75rem;
-}
-
-
 
 .error-alert {
 	display: none;

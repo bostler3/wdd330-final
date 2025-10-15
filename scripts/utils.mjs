@@ -71,7 +71,6 @@ export async function loadHeaderFooter() {
     hambutton.addEventListener('click', () => {
         mainnav.classList.toggle('open');
         hambutton.classList.toggle('open');
-        console.log("button pushed");
     });
 }
 
@@ -93,5 +92,5 @@ export function alertMessage(message, scroll = true) {
     // Got help from a Bing search for: "show a div on the page for five seconds javascript"
     setTimeout(() => {
         alertElement.style.display = "none";
-    }, 3000);
+    }, 5000);
 }

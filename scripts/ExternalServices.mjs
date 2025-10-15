@@ -44,13 +44,30 @@ export default class ExternalServices {
         topSupportingCharacters.forEach((character) => {
             selectedCharactersIDs.push(character.character.mal_id);
         })
-        //console.log('Selected character IDs:', selectedCharactersIDs);
         return selectedCharactersIDs;
+    }
+    async getCharacterObjectsByShow(show) {
+        const response = await fetch(`${baseAnimeURL}anime/${show}/characters`);
+        const data = await convertToJson(response);
+        const apiData = data.data;
+        // Got help from a Bing search for how to filter an array based on a condition
+        const mainCharacters = apiData.filter(character => character.role === "Main");
+        const supportingCharacters = apiData.filter(character => character.role === "Supporting");
+        // Got help from a Bing search for how to sort and reduce an array
+        const sortedSupportingCharacters = supportingCharacters.sort((a, b) => b.character.favorites - a.character.favorites);
+        const topSupportingCharacters = sortedSupportingCharacters.slice(0, 5);
+        let selectedCharacters = [];
+        mainCharacters.forEach((character) => {
+            selectedCharacters.push(character);
+        })
+        topSupportingCharacters.forEach((character) => {
+            selectedCharacters.push(character);
+        })
+        return selectedCharacters;
     }
     getPokemonCharacters() {
         // Top characters source: https://fictionhorizon.com/the-most-popular-pokemon-ranked/
         let selectedCharactersNames = ["charizard", "pikachu", "bulbasaur", "eevee", "dragapult", "gengar", "lucario", "greninja", "gardevoir", "rayquaza", "gyarados", "togekiss", "arcanine", "sylveon", "tyranitar", "vaporeon", "snorlax", "blastoise", "flygon"];
-        // console.log('Selected character names:', selectedCharactersNames);
         return selectedCharactersNames;
     }
 
@@ -68,7 +85,6 @@ export default class ExternalServices {
                 console.error(error.message);
             }
         }
-        //console.log('Characters', responses);
         return responses;
     }
     async getPokemonCharacterDetail() {
@@ -85,7 +101,6 @@ export default class ExternalServices {
                 console.error(error.message);
             }
         }
-        // console.log('Poke Characters', responses);
         return responses;
     }
 }

@@ -5,7 +5,7 @@ import FanMailShowList from "./MailShowList.mjs";
 
 loadHeaderFooter();
 
-/*const dataSource = new ExternalServices();
+const dataSource = new ExternalServices();
 const element = document.querySelector("#shows");
 const showList = new FanMailShowList(dataSource, element);
 
@@ -18,35 +18,48 @@ function createPokeOption() {
   element.add(pokeOption);
 }
 
-createPokeOption();*/
+createPokeOption();
 
-// For testing...delete once localstorage favorites is available
-const characters = [
-  {
-    characterName: "Test1"
-  },
-  {
-    characterName: "Test2"
-  }
-]
-
-
-
-
-// This will help populate the "To" field drop-down once localstorage is populated with favorite characters
 const selectElement = document.querySelector("#toCharacters");
-characters.forEach (character => {
-  const optionElement = document.createElement("option");
-  optionElement.value = character.characterName;
-  optionElement.textContent = character.characterName;
-  selectElement.appendChild(optionElement);
 
+element.addEventListener("change", async function() {
+  const selectedShowValue = element.value;
+  let characters = [];
+  // Got help from a Bing search for "delete all options in select element javascript except placeholder option"
+  for (let i = selectElement.options.length - 1; i > 0; i--) {
+    selectElement.remove(i);
+  }
+  if (selectedShowValue === "Pokémon") {
+    const pokemonNames = dataSource.getPokemonCharacters();
+    pokemonNames.forEach(name => {
+      const properName = name.charAt(0).toUpperCase() + name.slice(1);
+      characters.push(properName);
+    });
+  } else {
+    const topShows = await dataSource.getAnimeShowData();
+    // Got help from a Bing search for "lookup an attribute value using another attribute value in an array of objects javascript"
+    const selectedShowName = topShows.find(item => item.title_english === selectedShowValue);
+    const selectedShowID = selectedShowName.mal_id;
+    const charactersFromTopShows = await dataSource.getCharacterObjectsByShow(selectedShowID);
+    charactersFromTopShows.forEach(item => {
+      const returnedName = item.character.name;
+      // Got help from a Bing search for "change string from last, first to first last if last name is empty javascript"
+      const [last, first] = returnedName.split(",").map(part => part.trim());
+      characters.push((first ? `${first}` : "") + (last ? ` ${last}` : ""));
+    });
+  }
+  characters.forEach(character => {
+    const optionElement = document.createElement("option");
+    optionElement.value = character;
+    optionElement.textContent = character;
+    selectElement.appendChild(optionElement);
+  });
 });
 
-function updateSelectedCharacter () {
-  const selectedCharacterValue = selectElement.options[selectElement.selectedIndex].value;
+selectElement.addEventListener("change", function () {
+  const selectedCharacterValue = selectElement.value;
   document.querySelector("#selected-character").textContent = selectedCharacterValue;
-}
+});
 
 const submitButtonElement = document.querySelector("#submit-button");
 const responseForm = document.querySelector('.response-form');
@@ -67,6 +80,7 @@ submitButtonElement.addEventListener("click", (e) => {
   checkCountry();
   checkFullName();
   checkToName();
+  checkShow();
   if (formCheck) {
     if (responseForm.style.display === 'none' || responseForm.style.display === '') {
       const fromName = document.querySelector("#full-name").value.trim();
@@ -80,6 +94,13 @@ submitButtonElement.addEventListener("click", (e) => {
     }
   }
 });
+
+function checkShow() {
+  const show = document.querySelector("#shows").value.trim();
+  if (show === "") {
+    alertMessage("Show field cannot be blank");
+  }
+}
 
 function checkToName() {
   const toName = document.querySelector("#toCharacters").value.trim();

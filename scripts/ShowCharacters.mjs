@@ -1,9 +1,3 @@
-/* TODO:
--Incorporate favorites functionality
--Trading card functionality
-*/
-import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
-
 const charactersElement = document.querySelector(".show-characters-container");
 
 export default class ShowCharacters {
@@ -16,25 +10,7 @@ export default class ShowCharacters {
     async init() {
         this.character = await this.dataSource.getCharacterDetail(this.showID);
         this.renderDisplay();
-        //document.querySelector("#favorite-star2").addEventListener("click", this.addCharacterToFavorites.bind(this));
     }
-    /*addCharacterToFavorites() {
-        const favoriteCharacterIcon = document.querySelector("#favorite-star2");
-        const card = document.querySelector(".card");
-        let favCharacters = getLocalStorage("ls-characters") || [];
-        card.classList.toggle("flipped");
-        if (favoriteCharacterIcon.classList.contains("favorite-star-currentFavorite")) {
-            favCharacters = favCharacters.filter(item => item.mal_id !== element.data.data.mal_id);
-            setLocalStorage("ls-characters", favCharacters);
-            favoriteCharacterIcon.classList.remove("favorite-star-currentFavorite");
-            alertMessage("Character removed from favorites!");
-        } else {
-            favCharacters.push(element);
-            setLocalStorage("ls-characters", favCharacters);
-            favoriteCharacterIcon.classList.add("favorite-star-currentFavorite");
-            alertMessage("Character added to favorites!");
-        }
-    }*/
     renderDisplay() {
         showDetailTemplate(this.character, this.displayElement);
     }
@@ -55,11 +31,6 @@ function showDetailTemplate(character) {
         let birthplace = document.createElement("p");
         let nicknames = document.createElement("p");
         let favorites = document.createElement("p");
-        /*let favoriteCharacterIcon = document.createElement("div");
-        favoriteCharacterIcon.setAttribute("class", "favorite-star");
-        favoriteCharacterIcon.setAttribute("id", "favorite-star2");
-        favoriteCharacterIcon.innerHTML = "&#9733";
-        favoriteCharacterIcon.setAttribute("data-id", element.data.data.mal_id);*/
         photo.setAttribute("src", element.data.data.images.webp.image_url);
         photo.setAttribute("alt", `Image of ${element.data.data.name} anime character`);
         photo.setAttribute("loading", "lazy");
@@ -80,7 +51,6 @@ function showDetailTemplate(character) {
         favorites.textContent = `# of fan favorites: ${properFavorites}`;
         cardFront.appendChild(name);
         cardFront.appendChild(nameKanji);
-        //cardFront.appendChild(favoriteCharacterIcon);
         cardFront.appendChild(photo);
         card.appendChild(cardFront);
         cardBack.appendChild(birthplace);
@@ -91,10 +61,5 @@ function showDetailTemplate(character) {
         card.addEventListener("click", () => {
             card.classList.toggle("flipped");
         });
-
-        /*const favCharacters = getLocalStorage("ls-characters") || [];
-        if (favCharacters.some(item => item.mal_id === element.data.data.name)) {
-            favoriteCharacterIcon.classList.add("favorite-star-currentFavorite");
-        }*/
     });
 }

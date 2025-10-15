@@ -66,8 +66,7 @@
         transition: none;
     }
     
-    #menu,
-    #filter-menu {
+    #menu {
         display: none;
     }
 
@@ -135,7 +134,7 @@
 	.favorites-line, .show-detail-lines {
 		width: 33%;
 	}
-	/* Tickets */
+
     fieldset {
         max-width: 900px;
     }
@@ -152,11 +151,7 @@
         grid-template-columns: 1fr;
     }
 
-    /*.list section>* {
-        margin: 0 1.5rem;
-    }*/
-
-    .list .schedule-team {
+    .list {
         font-weight: bold;
     }
 

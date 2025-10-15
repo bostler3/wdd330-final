@@ -1,8 +1,3 @@
-/* TODO:
--Incorporate favorites functionality
-*/
-import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
-
 export default class ShowPokeCharacters {
     constructor(dataSource, displayElement) {
         this.dataSource = dataSource;
@@ -12,12 +7,6 @@ export default class ShowPokeCharacters {
     async init() {
         this.character = await this.dataSource.getPokemonCharacterDetail();
         this.renderDisplay();
-    }
-    addCharacterToFavorites() {
-        const characters = getLocalStorage("ls-characters") || [];
-        characters.push(this.character);
-        setLocalStorage("ls-characters", characters);
-        alertMessage("Character added to favorites!");
     }
     renderDisplay() {
         showDetailTemplate(this.character, this.displayElement);
@@ -40,10 +29,6 @@ function showDetailTemplate(character, displayElement) {
         let abilities = document.createElement("p");
         let statsTitle = document.createElement("p");
         let stats = document.createElement("ul");
-        let favoriteCharacterIcon = document.createElement("div");
-        favoriteCharacterIcon.setAttribute("class", "favorite-star");
-        favoriteCharacterIcon.setAttribute("id", "favorite-character-star");
-        favoriteCharacterIcon.innerHTML = "&#9733";
         photo.setAttribute("src", element.data.sprites.front_default);
         photo.setAttribute("alt", `Image of ${element.data.name} Pokémon character`);
         photo.setAttribute("loading", "lazy");
@@ -80,7 +65,6 @@ function showDetailTemplate(character, displayElement) {
         });
 
         cardFront.appendChild(name);
-        cardFront.appendChild(favoriteCharacterIcon);
         cardFront.appendChild(photo);
         cardFront.appendChild(types);
         card.appendChild(cardFront);

@@ -16,8 +16,3 @@ const charactersElement = document.querySelector('.show-characters-container');
 const characters = new ShowCharacters(show, dataSource, charactersElement);
 
 characters.init();
-
-
-
-
-

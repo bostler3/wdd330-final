@@ -1,13 +1,10 @@
-<!-- TO DO
- -Drop-down menu from localstorage favorites to work
- -->
-
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anime Fun! - Fan Mail</title>
+	<meta name="author" content="Blake Ostler">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Serif+JP&family=Patua+One&family=Roboto&display=swap" rel="stylesheet">
@@ -27,13 +24,13 @@
 		<div id="joint-content-container">
 			<div class="left-side">
 				<form method="get" name="fanmail-form" class="form" onsubmit="showAck(event)">
-					<!-- <label for="shows" id="shows-select-label">Show:*</label>
+					<label for="shows" id="shows-select-label">Show:*</label>
 					<select name="shows" id="shows" required>
 						<option value="" id="shows-list-placeholder" disabled selected hidden>Choose a show ...
 						</option>
-					</select>-->
-					<label for="toCharacters" id="select-label">To:*</label> <!--Need to fix this to grab favorite characters from localstorage-->
-					<select name="toCharacters" id="toCharacters" onchange="updateSelectedCharacter()" required>
+					</select>
+					<label for="toCharacters" id="select-label">To:*</label>
+					<select name="toCharacters" id="toCharacters" required>
 						<option value="" id="toCharacters-list-placeholder" disabled selected hidden>Choose a character ...
 						</option>
 					</select>
